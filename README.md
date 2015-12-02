@@ -20,14 +20,14 @@ println("Dynamic method:")
 @time M2 = dynmultiply(A, B, C, D);
 
 println("Relative error: ", maximum(abs(M2 - M1))/maximum(abs(M1)))
-println("Multiplication order: ", dynmultiplystr(arrays...))
+println("Multiplication order: ", dynmultiplystr(A, B, C, D))
 ```
 Output:
 ```
-Dynamic method:
-  0.005726 seconds (15 allocations: 867.906 KB)
 Standard multiplication:
   0.145828 seconds (13 allocations: 77.134 MB, 33.59% gc time)
+Dynamic method:
+  0.005726 seconds (15 allocations: 867.906 KB)
 Relative error: 9.402683663711557e-16
 Multiplication order: ((A1*A2)*(A3*A4))
 ```
