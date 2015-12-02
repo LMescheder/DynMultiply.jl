@@ -2,6 +2,7 @@ module DynMultiply
 
 export dynmultiply, dynmultiply_plan, dynmultiplystr
 
+import Base.getindex, Base.setindex!
 
 type DynMultTable
     data::Array{Int64, 1}
@@ -87,4 +88,3 @@ function dynmultiplystr_part(s::Int64, l::Int64, plan)
 end
 
 end
-
