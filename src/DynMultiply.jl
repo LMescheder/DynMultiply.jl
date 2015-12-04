@@ -7,27 +7,27 @@ import Base.getindex, Base.setindex!
 # The table contains at index N + ... + (N - l + 2) + s the entry
 # corresponding to a subsequence with start index s and length l
 type DynMultTable
-    data::Array{Int64, 1}
-    N::Int64
-    DynMultTable(N) = new(zeros(Int64, div(N*(N+1), 2)), N)
+    data::Array{Int, 1}
+    N::Int
+    DynMultTable(N) = new(zeros(Int, div(N*(N+1), 2)), N)
 end
 
-function getdataindex(table::DynMultTable, s::Int64, l::Int64)
+function getdataindex(table::DynMultTable, s::Int, l::Int)
     return (l-1)*table.N - div((l-1)*(l-2), 2) + s
 end
 
 # Accessor functions
-function getindex(table::DynMultTable, s::Int64, l::Int64)
+function getindex(table::DynMultTable, s::Int, l::Int)
     return table.data[getdataindex(table, s, l)]
 end
 
-function setindex!(table::DynMultTable, val::Int64, s::Int64, l::Int64)
+function setindex!(table::DynMultTable, val::Int, s::Int, l::Int)
     table.data[getdataindex(table, s, l)] = val
 end
 
-# Multiplication cost for multiplying group s, ..., j-1 and 
+# Multiplication cost for multiplying group s, ..., j-1 and
 # j, ..., f-1
-function multiplycost(arrays, s::Int64, j::Int64, f::Int64)
+function multiplycost(arrays, s::Int, j::Int, f::Int)
     size(arrays[s], 1) * size(arrays[j], 1) * size(arrays[f-1], 2)
 end
 
@@ -43,7 +43,7 @@ function dynmultiply_plan(arrays...)
     # calculate costs and subsequence lengths
     for l= 2:N          # sequence length
         for s=1:N-l+1   # start index
-            mincost = typemax(Int64)
+            mincost = typemax(Int)
             l1opt = 0
             for l1=1:l-1    # first sequence length
                 multcost = multiplycost(arrays, s, s+l1, s+l)
@@ -71,7 +71,7 @@ function dynmultiply(arrays...)
 end
 
 # Multiply subsequence s, ..., s+l corresponding to plan
-function dynmultiply_part(arrays, s::Int64, l::Int64, plan)
+function dynmultiply_part(arrays, s::Int, l::Int, plan)
     if l == 1
         return arrays[s]
     else
@@ -89,7 +89,7 @@ end
 
 # Create string representation of multiplication order of subsequence
 # s, ..., s+l corresponding to plan
-function dynmultiplystr_part(s::Int64, l::Int64, plan)
+function dynmultiplystr_part(s::Int, l::Int, plan)
     if l == 1
         return "A$s"
     else
