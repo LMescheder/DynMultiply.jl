@@ -6,7 +6,7 @@
 This package includes a simple algorithm that selects the best multiplication order of matrices depending on their shape.
 
 ## Usage
-```
+```julia
 using DynMultiply
 A = rand(1000, 100)
 B = rand(100, 10)
