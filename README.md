@@ -1,6 +1,7 @@
 # DynMultiply
 
 [![Build Status](https://travis-ci.org/LMescheder/DynMultiply.jl.svg?branch=master)](https://travis-ci.org/LMescheder/DynMultiply.jl)
+[![Coverage Status](https://coveralls.io/repos/github/LMescheder/DynMultiply.jl/badge.svg?branch=master)](https://coveralls.io/github/LMescheder/DynMultiply.jl?branch=master)
 
 ## Introduction
 This package includes a simple algorithm that selects the best multiplication order of matrices depending on their shape.
